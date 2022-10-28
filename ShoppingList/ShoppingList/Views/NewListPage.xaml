@@ -3,10 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ShoppingList.Views.NewListPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="New List Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="0,20,0,0">
+            <Label Text="Ny lista"
+                
+                HorizontalOptions="CenterAndExpand"
+                />
+
+            <Editor Margin="0,20,10,20" Placeholder="Listnamn"
+                Text="{Binding Text}"
+                />
+
+            <Grid Margin="0,20,10,20" ColumnDefinitions="300,50" VerticalOptions="StartAndExpand">
+
+                <Editor Placeholder="Lägg till objekt"
+                Text="{Binding Text}"
+                 />
+
+                <Button BackgroundColor="White" Grid.Column="1" Text="+" TextColor="#2196F3" FontSize="Large"/>
+            </Grid>
+
+            <Grid Margin="20,0,20,10" ColumnDefinitions="*,*" >
+
+                <Button BackgroundColor="Red" Text="Ta bort" TextColor="White" FontSize="Large"/>
+
+                <Button Grid.Column="1" BackgroundColor="Green" Text="Lägg till" TextColor="White" FontSize="Large"/>
+            </Grid>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
