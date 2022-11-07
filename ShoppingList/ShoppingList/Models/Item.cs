@@ -6,7 +6,7 @@ using SQLiteNetExtensions.Attributes;
 
 namespace ShoppingList.Models
 {
-    internal class Item
+    public class Item
     {
         [PrimaryKey, AutoIncrement]
         public int ItemlId { get; set; }
@@ -14,10 +14,10 @@ namespace ShoppingList.Models
         public string Text { get; set; }
         public bool Done { get; set; }
 
-        [ForeignKey(typeof(List))]
-        public int NoteId { get; set; }
+        [ForeignKey(typeof(TheList))]
+        public int ListId { get; set; }
 
         [ManyToOne]
-        public List List { get; set; }
+        public TheList TheList { get; set; }
     }
 }
