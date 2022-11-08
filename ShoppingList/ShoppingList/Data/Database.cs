@@ -21,7 +21,7 @@ namespace ShoppingList.Data
         //<< -------------------The List------------------- >>
         
         //<< Get all Lists >>.
-        public Task<List<TheList>> GetNotesAsync()
+        public Task<List<TheList>> GetListsAsync()
         {
             return database.Table<TheList>().ToListAsync();
         }
@@ -68,7 +68,7 @@ namespace ShoppingList.Data
         public Task<Item> GetItemAsync(int id)
         {
             return database.Table<Item>()
-                            .Where(i => i.ItemlId == id)
+                            .Where(i => i.ItemId == id)
                             .FirstOrDefaultAsync();
         }
 
@@ -83,7 +83,7 @@ namespace ShoppingList.Data
         //<< Save and update Item >>.
         public Task<int> SaveItemlAsync(Item item)
         {
-            if (item.ItemlId != 0)
+            if (item.ItemId != 0)
             {
                 // Update an existing Item.
                 return database.UpdateAsync(item);
