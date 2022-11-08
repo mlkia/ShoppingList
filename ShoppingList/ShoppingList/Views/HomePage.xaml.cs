@@ -19,40 +19,27 @@ namespace ShoppingList.Views
             InitializeComponent();
         }
 
+        // Retrieve all the Lists from the database, and set them as the
+        // data source for the CollectionView.
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-
-            // Retrieve all the Lists from the database, and set them as the
-            // data source for the CollectionView.
-            collectionView.ItemsSource = await App.DatabaseCon.GetNotesAsync();
+            collectionView.ItemsSource = await App.DatabaseCon.GetListsAsync();
         }
 
+        // << Navigate to the Add New List Page, without passing any data >>.
         async void OnAddClicked(object sender, EventArgs e)
         {
-            // Navigate to the NoteEntryPage, without passing any data.
-            await Shell.Current.GoToAsync(nameof(NoteEntryPage));
+            await Shell.Current.GoToAsync(nameof(NewListPage));
         }
 
-        async void OnAddArtikelClicked(object sender, EventArgs e)
-        {
-            // Navigate to the NoteEntryPage, without passing any data.
-            await Shell.Current.GoToAsync(nameof(ArtikelEntryPage));
-        }
-
-        async void OnArtikelPageClicked(object sender, EventArgs e)
-        {
-            // Navigate to the NoteEntryPage, without passing any data.
-            await Shell.Current.GoToAsync(nameof(ArtikelViewPage));
-        }
-
+        // Navigate to the Items View page, passing the Id as a query parameter.
         async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.CurrentSelection != null)
             {
-                // Navigate to the NoteEntryPage, passing the ID as a query parameter.
-                Note note = (Note)e.CurrentSelection.FirstOrDefault();
-                await Shell.Current.GoToAsync($"{nameof(ArtikelViewPage)}?{nameof(ArtikelViewPage.ItemId)}={note.ID.ToString()}");
+                TheList list = (TheList)e.CurrentSelection.FirstOrDefault();
+                await Shell.Current.GoToAsync($"{nameof(ItemsViewPage)}?{nameof(ItemsViewPage.ItemId)}={list.Id.ToString()}");
             }
         }
     }

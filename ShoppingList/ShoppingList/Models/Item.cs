@@ -9,7 +9,7 @@ namespace ShoppingList.Models
     public class Item
     {
         [PrimaryKey, AutoIncrement]
-        public int ItemlId { get; set; }
+        public int ItemId { get; set; }
 
         public string Text { get; set; }
         public bool Done { get; set; }
