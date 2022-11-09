@@ -39,7 +39,7 @@ namespace ShoppingList.Views
             if (e.CurrentSelection != null)
             {
                 TheList list = (TheList)e.CurrentSelection.FirstOrDefault();
-                await Shell.Current.GoToAsync($"{nameof(ItemsViewPage)}?{nameof(ItemsViewPage.ItemId)}={list.Id.ToString()}");
+                await Shell.Current.GoToAsync($"{nameof(ItemsViewPage)}?{nameof(ItemsViewPage.ListId)}={list.Id.ToString()}");
             }
         }
     }
