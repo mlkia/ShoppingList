@@ -11,9 +11,11 @@ using Xamarin.Forms.Xaml;
 
 namespace ShoppingList.Views
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public partial class NewListPage : ContentPage
     {
+
         public string ItemId
         {
             set
@@ -45,6 +47,19 @@ namespace ShoppingList.Views
             }
         }
 
+        
+            private void OnEntryTextChanged(object sender, EventArgs e)
+        {
+            var entry = (Entry)sender;
+
+            if (!string.IsNullOrWhiteSpace(entry.Text))
+            {
+                btnSave.IsEnabled = true;
+            }
+            else { btnSave.IsEnabled = false; }
+        }
+        
+        
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
             var list = (TheList)BindingContext;

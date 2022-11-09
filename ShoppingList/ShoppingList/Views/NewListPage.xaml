@@ -1,34 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShoppingList.Views.NewListPage">
-    <ContentPage.Content>
-        <StackLayout Margin="0,20,0,0">
-            <Label Text="Ny lista"
-                
-                HorizontalOptions="CenterAndExpand"
-                />
-
-            <Editor Margin="0,20,10,20" Placeholder="Listnamn"
-                Text="{Binding Text}"
-                />
-
-            <Grid Margin="0,20,10,20" ColumnDefinitions="300,50" VerticalOptions="StartAndExpand">
-
-                <Editor Placeholder="Lägg till objekt"
-                Text="{Binding Text}"
-                 />
-
-                <Button BackgroundColor="White" Grid.Column="1" Text="+" TextColor="#2196F3" FontSize="Large"/>
-            </Grid>
-
-            <Grid Margin="20,0,20,10" ColumnDefinitions="*,*" >
-
-                <Button BackgroundColor="Red" Text="Ta bort" TextColor="White" FontSize="Large"/>
-
-                <Button Grid.Column="1" BackgroundColor="Green" Text="Lägg till" TextColor="White" FontSize="Large"/>
-            </Grid>
-
-        </StackLayout>
-    </ContentPage.Content>
+             x:Class="ShoppingList.Views.NewListPage"
+             Title="Ny lista">
+    <!-- Layout children vertically -->
+    <StackLayout Margin="20">
+        <Entry Placeholder="Listnamn"
+                TextChanged="OnEntryTextChanged"
+                Text="{Binding Title}"
+                HeightRequest="100" />
+        <!-- Layout children in two columns -->
+        <Grid ColumnDefinitions="*,*">
+            <Button Grid.Column="1"
+                    x:Name="btnSave"
+                    IsEnabled="False"
+                    Text="Skapa"
+                    Clicked="OnSaveButtonClicked" />
+            <Button Text="Avbryt"
+                    Clicked="OnDeleteButtonClicked"/>
+        </Grid>
+    </StackLayout>
 </ContentPage>
