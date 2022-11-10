@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShoppingList.Views.NewItemPage"
-             Title="Lägg till vara">
+             x:Class="ShoppingList.Views.NewListPage"
+             Title="Ny lista">
     <!-- Layout children vertically -->
     <StackLayout Margin="20">
-        <Entry Text="{Binding Text}"
-                Placeholder="Varunamn"
-               TextChanged="OnEntryTextChanged"
+        <Entry  Placeholder="Listnamn"
+                TextChanged="OnEntryTextChanged"
+                Text="{Binding Title}"
                 HeightRequest="100" />
         <!-- Layout children in two columns -->
         <Grid ColumnDefinitions="*,*">
@@ -15,9 +15,9 @@
                     x:Name="btnSave"
                     IsEnabled="False"
                     Text="Skapa"
-                    Clicked="OnSaveClicked" />
+                    Clicked="OnSaveButtonClicked" />
             <Button Text="Avbryt"
-                    Clicked="OnDeleteClicked"/>
+                    Clicked="OnDeleteButtonClicked"/>
         </Grid>
     </StackLayout>
 </ContentPage>

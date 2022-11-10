@@ -1,19 +1,31 @@
-﻿using ShoppingList.Services;
-using ShoppingList.Views;
+﻿
+using ShoppingList.Data;
 using System;
+using System.IO;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace ShoppingList
 {
     public partial class App : Application
     {
+        static Database database;
 
+        // << Create the database connection as a singleton >>.
+        public static Database DatabaseCon
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new Database(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ShoppingList.db3"));
+                }
+                return database;
+            }
+        }
         public App()
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 

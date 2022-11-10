@@ -1,7 +1,4 @@
-﻿using ShoppingList.ViewModels;
-using ShoppingList.Views;
-using System;
-using System.Collections.Generic;
+﻿using ShoppingList.Views;
 using Xamarin.Forms;
 
 namespace ShoppingList
@@ -11,13 +8,12 @@ namespace ShoppingList
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
+            Routing.RegisterRoute(nameof(NewListPage), typeof(NewListPage));
+            Routing.RegisterRoute(nameof(ItemsViewPage), typeof(ItemsViewPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
-        }
+            
 
-        private async void OnMenuItemClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("//LoginPage");
         }
+        
     }
 }
