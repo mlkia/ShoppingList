@@ -1,31 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ShoppingList.ViewModels"
              x:Class="ShoppingList.Views.ItemsViewPage"
+             x:Name="ItemsPage"
              Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <viewModels:ItemsPageViewModel />
+    </ContentPage.BindingContext>
+    
     <!-- Add an item to the toolbar -->
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add Artikel"
                      Clicked="OnAddItemClicked"/>
-
     </ContentPage.ToolbarItems>
 
-    <CollectionView x:Name="collectionView"
+    <RefreshView
+        Command="{Binding RefreshCommand}"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+
+        <CollectionView 
+            ItemsSource="{Binding BoardNameList}"
                     Margin="20">
+
         <!-- Define the appearance of each item in the list -->
         <CollectionView.ItemTemplate>
-
             <DataTemplate>
                 <StackLayout>
+                    <CheckBox x:Name="itemCheckbox" IsChecked="{Binding Done,Mode=OneTime}" CheckedChanged="OnCheckBoxCheckedChanged"/>
                     <Label Text="{Binding Text}"
                            FontSize="Medium"/>
-                    <Label Text="{Binding ListId}"
+                        <Label Text="{Binding ListId}"
                            FontSize="Medium"/>
-                    <Label Text="{Binding Done}"
+                        <Label Text="{Binding Done}"
                            TextColor="Silver"
                            FontSize="Small" />
                 </StackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
+    </RefreshView>
 </ContentPage>
