@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ShoppingList.ViewModels;
 
 namespace ShoppingList.Views
 {

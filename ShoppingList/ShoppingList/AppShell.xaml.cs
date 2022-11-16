@@ -1,4 +1,5 @@
-﻿using ShoppingList.Views;
+﻿using ShoppingList.ViewModels;
+using ShoppingList.Views;
 using Xamarin.Forms;
 
 namespace ShoppingList
@@ -11,7 +12,8 @@ namespace ShoppingList
             Routing.RegisterRoute(nameof(NewListPage), typeof(NewListPage));
             Routing.RegisterRoute(nameof(ItemsViewPage), typeof(ItemsViewPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
-            
+            Routing.RegisterRoute(nameof(ItemsPageViewModel), typeof(ItemsPageViewModel));
+
 
         }
         

@@ -1,4 +1,5 @@
-﻿using ShoppingList.Models;
+﻿using ShoppingList.Data;
+using ShoppingList.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +11,16 @@ using Xamarin.Forms.Xaml;
 
 namespace ShoppingList.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     [QueryProperty(nameof(ListId), nameof(ListId))]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ItemsViewPage : ContentPage
     {
         public int LoadListId { get; set; }
+        
         public string ListId
         {
             set
             {
-                LoadItems(value);
-                LoadList(value);
                 GetListId(value);
             }
         }
@@ -43,39 +43,21 @@ namespace ShoppingList.Views
             }
         }
 
-        async void LoadItems(string itemId)
-        {
-            try
-            {
-                int id = Convert.ToInt32(itemId);
-                // Retrieve the note and set it as the BindingContext of the page.
-                List<Item> items = await App.DatabaseCon.GetItemsOfListAsync(id);
-                collectionView.ItemsSource = items;
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Failed to load item.");
-            }
-        }
-
-        async void LoadList(string itemId)
-        {
-            try
-            {
-                int id = Convert.ToInt32(itemId);
-                // Retrieve the note and set it as the BindingContext of the page.
-                TheList list = await App.DatabaseCon.GetListAsync(id);
-                BindingContext = list;
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Failed to load note.");
-            }
-        }
-
         async void OnAddItemClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync($"{nameof(NewItemPage)}?{nameof(NewItemPage.ListId)}={LoadListId.ToString()}");
+        }
+        
+        private void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+
+            var item = ((CheckBox)sender).BindingContext as Item;
+
+            if (item == null)
+                return;
+            
+            item.Done = e.Value;
+            App.DatabaseCon.SaveItemlAsync(item);
         }
     }
 }
