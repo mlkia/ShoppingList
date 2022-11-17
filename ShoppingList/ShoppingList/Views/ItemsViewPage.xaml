@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              xmlns:viewModels="clr-namespace:ShoppingList.ViewModels"
              x:Class="ShoppingList.Views.ItemsViewPage"
              x:Name="ItemsPage"
-             Title="{Binding Title}">
+             Title="{Binding ListTitle}">
 
     <ContentPage.BindingContext>
         <viewModels:ItemsPageViewModel />
@@ -21,13 +22,25 @@
         IsRefreshing="{Binding IsBusy, Mode=OneWay}">
 
         <CollectionView 
-            ItemsSource="{Binding BoardNameList}"
-                    Margin="20">
+            x:Name="collectionView"
+            ItemsSource="{Binding ItemsList}"
+            Margin="20">
 
         <!-- Define the appearance of each item in the list -->
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <StackLayout>
+                    <SwipeView android:SwipeView.SwipeTransitionMode="Drag">
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteCommand}"
+                                    CommandParameter="{Binding .}"
+                                    IsDestructive="True"
+                                    Text="Delete" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <StackLayout>
                     <CheckBox x:Name="itemCheckbox" IsChecked="{Binding Done,Mode=OneTime}" CheckedChanged="OnCheckBoxCheckedChanged"/>
                     <Label Text="{Binding Text}"
                            FontSize="Medium"/>
@@ -37,7 +50,8 @@
                            TextColor="Silver"
                            FontSize="Small" />
                 </StackLayout>
-            </DataTemplate>
+                </SwipeView>
+                </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
     </RefreshView>
