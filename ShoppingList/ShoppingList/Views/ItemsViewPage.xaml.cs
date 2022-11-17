@@ -32,7 +32,6 @@ namespace ShoppingList.Views
 
         void GetListId(string itemId)
         {
-
             try
             {
                 LoadListId = Convert.ToInt32(itemId);
@@ -50,7 +49,6 @@ namespace ShoppingList.Views
         
         private void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-
             var item = ((CheckBox)sender).BindingContext as Item;
 
             if (item == null)

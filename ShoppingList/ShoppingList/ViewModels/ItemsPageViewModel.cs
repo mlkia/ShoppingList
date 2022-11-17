@@ -18,17 +18,43 @@ namespace ShoppingList.ViewModels
     [QueryProperty(nameof(ListId), nameof(ListId))]
     public class ItemsPageViewModel : ObservableObject 
     {
-        public bool IsBusy { get; set; }
-        public AsyncCommand RefreshCommand { get; }
+        bool isBusy;
 
-        private List<Item> _boardNameList = new List<Item>();
-
-        public List<Item> BoardNameList
+        public bool IsBusy 
         {
-            get { return _boardNameList; }
+            get => isBusy;
             set
             {
-                _boardNameList = value;
+                isBusy = value;
+                OnPropertyChanged(nameof(IsBusy));
+            }
+        }
+        
+        public AsyncCommand RefreshCommand { get; }
+        public AsyncCommand<Item> DeleteCommand { get; }
+
+
+        private List<Item> _itemsList = new List<Item>();
+
+        public List<Item> ItemsList
+        {
+            get { return _itemsList; }
+            set
+            {
+                _itemsList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        
+
+        private string _listTitle;
+        public string ListTitle
+        {
+            get { return _listTitle; }
+            set
+            {
+                _listTitle = value;
                 OnPropertyChanged();
             }
         }
@@ -38,23 +64,49 @@ namespace ShoppingList.ViewModels
             set
             {
                 LoadItems(value);
+                GetCurrentListId(value);
             }
         }
-        
-        public ItemsPageViewModel()
-        {
-             RefreshCommand = new AsyncCommand(Refresh);
-        }
 
+        //<summary>
+        //CurrentListId and CurrentListId properties will get and save the current list Id.
+        //</summary>
 
-        async void LoadItems(string itemId)
+        public string CurrentListId { get; set; }
+
+        void GetCurrentListId(string itemId)
         {
             try
             {
-                int id = Convert.ToInt32(itemId);
-                // Retrieve the note and set it as the BindingContext of the page.
-                List<Item> items = await App.DatabaseCon.GetItemsOfListAsync(id);
-                BoardNameList = items;
+                CurrentListId = itemId;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Failed to load list Id.");
+            }
+        }
+
+        public ItemsPageViewModel()
+        {
+             RefreshCommand = new AsyncCommand(Refresh);
+             DeleteCommand = new AsyncCommand<Item>(Delete);
+        }
+
+        //<summary>
+        //Get all items of  the list from the database and set them to the ItemsList property.
+        //</summary>
+        async void LoadItems(string Id)
+        {
+            try
+            {
+                int listId = Convert.ToInt32(Id);
+                // Retrieve the items and set it as the BindingContext of the page.
+                List<Item> items = await App.DatabaseCon.GetItemsOfListAsync(listId);
+                TheList list = await App.DatabaseCon.GetListAsync(listId);
+                ItemsList = items;
+                ListTitle = list.Title;
+
+
 
             }
             catch (Exception)
@@ -62,13 +114,24 @@ namespace ShoppingList.ViewModels
                 Console.WriteLine("Failed to load item.");
             }
         }
+        
+        async Task Delete(Item item)
+        {
+            await App.DatabaseCon.DeleteItemAsync(item);
 
+            await Refresh();
+        }
+
+
+        //<summary>
+        //Refresh will get all items with current changes.
+        //</summary>
         async Task Refresh()
         {
             IsBusy = true;
-            
-            await Task.Delay(2000);
 
+            LoadItems(CurrentListId);
+            await Task.Delay(500);
 
             IsBusy = false;
         }
