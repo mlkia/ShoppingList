@@ -7,7 +7,7 @@
     <StackLayout Margin="20">
         <Entry Text="{Binding Text}"
                 Placeholder="Varunamn"
-               TextChanged="OnEntryTextChanged"
+                TextChanged="OnEntryTextChanged"
                 HeightRequest="100" />
         <!-- Layout children in two columns -->
         <Grid ColumnDefinitions="*,*">

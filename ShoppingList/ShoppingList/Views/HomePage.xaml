@@ -23,7 +23,6 @@
             <DataTemplate>
                 <StackLayout>
                     <Label Text="{Binding Title}"
-                           
                            FontSize="Medium"/>
                     <Label Text="{Binding Id}"
                            FontSize="Medium"/>

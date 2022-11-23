@@ -33,11 +33,18 @@
                         <SwipeView.RightItems>
                             <SwipeItems>
                                 <SwipeItem
-                                    BackgroundColor="Red"
-                                    Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteCommand}"
+                                    BackgroundColor="Green"
+                                    Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.EditItemCommand}"
                                     CommandParameter="{Binding .}"
                                     IsDestructive="True"
-                                    Text="Delete" />
+                                    Text="Redigera" />
+                                
+                                <SwipeItem
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteItemCommand}"
+                                    CommandParameter="{Binding}"
+                                    IsDestructive="True"
+                                    Text="Ta bort" />
                             </SwipeItems>
                         </SwipeView.RightItems>
                         <StackLayout>

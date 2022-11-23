@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ShoppingList.ViewModels"
+             x:Class="ShoppingList.Views.EditItemPage"
+             Title="Redigera artikel">
+
+
+    <ContentPage.BindingContext>
+        <viewModels:ItemsPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+                <Entry
+                x:Name="EditEntry"
+                Text="{Binding TheItem.Text}"
+                Placeholder="Varunamn"
+                HeightRequest="100" />
+            <!-- Layout children in two columns -->
+            <Grid ColumnDefinitions="*,*">
+                <Button Grid.Column="1"
+                 Command="{Binding SaveEditItemCommand}"
+                 CommandParameter="{Binding TheItem}"
+                        Text="Spara" />
+                <Button 
+                    Text="Avbryt"
+                    Command="{Binding CnacelEditItemCommand}"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
