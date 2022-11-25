@@ -1,16 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:viewModels="clr-namespace:ShoppingList.ViewModels"
              x:Class="ShoppingList.Views.HomePage"
              Title="Inköping Lista">
+
+    <ContentPage.BindingContext>
+        <viewModels:ListViewModel />
+    </ContentPage.BindingContext>
+    
     <!-- Add an item to the toolbar -->
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="+ Ny lista"
                      Clicked="OnAddClicked" />
     </ContentPage.ToolbarItems>
 
-    <!-- Display the lists in a list -->
+    <RefreshView
+        Command="{Binding RefreshCommand}"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+
+        <!-- Display the lists in a list -->
     <CollectionView x:Name="collectionView"
+                    ItemsSource="{Binding AllLists}"
                     Margin="20"
                     SelectionMode="Single"
                     SelectionChanged="OnSelectionChanged">
@@ -21,7 +33,24 @@
         <!-- Define the appearance of each item in the list -->
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <StackLayout>
+                <SwipeView android:SwipeView.SwipeTransitionMode="Drag">
+                    <SwipeView.RightItems>
+                        <SwipeItems>
+                            <SwipeItem
+                                    BackgroundColor="Green"
+                                    Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.EditListCommand}"
+                                    CommandParameter="{Binding .}"
+                                    IsDestructive="True"
+                                    Text="Redigera" />
+                            <SwipeItem
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteListCommand}"
+                                    CommandParameter="{Binding}"
+                                    IsDestructive="True"
+                                    Text="Ta bort" />
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+                    <StackLayout>
                     <Label Text="{Binding Title}"
                            FontSize="Medium"/>
                     <Label Text="{Binding Id}"
@@ -30,7 +59,9 @@
                            TextColor="Silver"
                            FontSize="Small" />
                 </StackLayout>
+                </SwipeView>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
+    </RefreshView>
 </ContentPage>

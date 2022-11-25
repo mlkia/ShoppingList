@@ -100,5 +100,12 @@ namespace ShoppingList.Data
         {
             return database.DeleteAsync(item);
         }
+
+        public Task<int> DeleteItemsOfListAsync(int id)
+        {
+            return database.Table<Item>()
+                            .Where(i => i.ListId == id)
+                            .DeleteAsync();
+        }
     }
 }

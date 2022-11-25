@@ -83,7 +83,7 @@ namespace ShoppingList.ViewModels
 
 
         //<summary>
-        //Set List Id to GGetItems and GetCurrentListId.
+        //Set List Id to GetItems and GetCurrentListId.
         //</summary>
         public string ListId
         {
