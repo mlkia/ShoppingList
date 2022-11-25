@@ -11,13 +11,14 @@ namespace ShoppingList.Models
         [PrimaryKey, AutoIncrement]
         public int ItemId { get; set; }
 
+        [ForeignKey(typeof(TheList))]
+        public int FK_ListId { get; set; } = 0;
         public string Text { get; set; }
         public bool Done { get; set; }
 
-        [ForeignKey(typeof(TheList))]
         public int ListId { get; set; }
 
-        [ManyToOne]
+        [ManyToOne("FK_ListId", "Id")]
         public TheList TheList { get; set; }
     }
 }

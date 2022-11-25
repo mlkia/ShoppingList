@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ShoppingList.ViewModels;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ShoppingList.Views
 {
@@ -22,11 +23,6 @@ namespace ShoppingList.Views
 
         // Retrieve all the Lists from the database, and set them as the
         // data source for the CollectionView.
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-            collectionView.ItemsSource = await App.DatabaseCon.GetListsAsync();
-        }
 
         // << Navigate to the Add New List Page, without passing any data >>.
         async void OnAddClicked(object sender, EventArgs e)

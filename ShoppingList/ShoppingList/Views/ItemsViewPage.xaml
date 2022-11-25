@@ -38,7 +38,6 @@
                                     CommandParameter="{Binding .}"
                                     IsDestructive="True"
                                     Text="Redigera" />
-                                
                                 <SwipeItem
                                     BackgroundColor="Red"
                                     Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteItemCommand}"
@@ -49,7 +48,7 @@
                         </SwipeView.RightItems>
                         <StackLayout>
                     <CheckBox x:Name="itemCheckbox" IsChecked="{Binding Done,Mode=OneTime}" CheckedChanged="OnCheckBoxCheckedChanged"/>
-                    <Label Text="{Binding Text}"
+                        <Label Text="{Binding Text}"
                            FontSize="Medium"/>
                         <Label Text="{Binding ListId}"
                            FontSize="Medium"/>

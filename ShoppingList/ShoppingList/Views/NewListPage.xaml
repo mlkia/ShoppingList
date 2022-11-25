@@ -2,12 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ShoppingList.Views.NewListPage"
+             xmlns:viewModels="clr-namespace:ShoppingList.ViewModels"
              Title="Ny lista">
+
+    <ContentPage.BindingContext>
+        <viewModels:ListViewModel />
+    </ContentPage.BindingContext>
+    
     <!-- Layout children vertically -->
     <StackLayout Margin="20">
         <Entry  Placeholder="Listnamn"
-                TextChanged="OnEntryTextChanged"
                 Text="{Binding Title}"
+                TextChanged="OnEntryTextChanged"
                 HeightRequest="100" />
         <!-- Layout children in two columns -->
         <Grid ColumnDefinitions="*,*">
@@ -15,9 +21,9 @@
                     x:Name="btnSave"
                     IsEnabled="False"
                     Text="Skapa"
-                    Clicked="OnSaveButtonClicked" />
+                    Command="{Binding SaveNewListCommand}"/>
             <Button Text="Avbryt"
-                    Clicked="OnDeleteButtonClicked"/>
+                    Clicked="OnCancelButtonClicked"/>
         </Grid>
     </StackLayout>
 </ContentPage>
