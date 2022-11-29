@@ -26,7 +26,12 @@
             ItemsSource="{Binding ItemsList}"
             Margin="20">
 
-        <!-- Define the appearance of each item in the list -->
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                               ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <!-- Define the appearance of each item in the list -->
         <CollectionView.ItemTemplate>
             <DataTemplate>
                     <SwipeView android:SwipeView.SwipeTransitionMode="Drag">
@@ -46,18 +51,40 @@
                                    IconImageSource ="icon_trash.png"/>
                             </SwipeItems>
                         </SwipeView.RightItems>
-                        <StackLayout>
-                    <CheckBox x:Name="itemCheckbox" 
-                              IsChecked="{Binding Done,Mode=OneTime}" 
-                              CheckedChanged="OnCheckBoxCheckedChanged"
-                              Color="#1a73e8"
-                              />
-                        <Label Text="{Binding Text}"
-                           FontSize="Medium"/>
-                </StackLayout>
+                        <Frame Padding="10"
+                               Margin="5">
+                            <StackLayout Orientation="Horizontal"
+                                          Spacing="15">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox 
+                                    Grid.Column="0"
+                                    x:Name="itemCheckbox" 
+                                    IsChecked="{Binding Done,Mode=OneTime}" 
+                                    CheckedChanged="OnCheckBoxCheckedChanged"
+                                    Color="#1a73e8"
+                                    VerticalOptions="Center"
+                                    />
+                                    <Label 
+                                    Grid.Column="1"
+                                    Text="{Binding Text}"
+                                    FontSize="Medium"
+                                    VerticalOptions="Center"/>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
                 </SwipeView>
                 </DataTemplate>
         </CollectionView.ItemTemplate>
-    </CollectionView>
+            <CollectionView.Footer>
+                <StackLayout BackgroundColor="White">
+                    <Label HeightRequest="50"
+                   Text="" />
+                </StackLayout>
+            </CollectionView.Footer>
+        </CollectionView>
     </RefreshView>
 </ContentPage>

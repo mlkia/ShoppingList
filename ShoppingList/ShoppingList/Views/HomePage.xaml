@@ -50,16 +50,35 @@
                                     IsDestructive="True"/>
                         </SwipeItems>
                     </SwipeView.RightItems>
-                    <StackLayout>
+                        <Frame Padding="5">
+                            <StackLayout Orientation="Vertical"
+                                HeightRequest="60">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                </Grid>
                     <Label Text="{Binding Title}"
-                           FontSize="Medium"/>
+                           FontSize="Medium"
+                           Grid.Row="0"
+                           VerticalOptions="Center"/>
                     <Label Text="{Binding Date}"
                            TextColor="Silver"
-                           FontSize="Small" />
+                           FontSize="Small"
+                           Grid.Row="1"
+                           VerticalOptions="End"/>
                 </StackLayout>
-                </SwipeView>
+                        </Frame>
+                    </SwipeView>
             </DataTemplate>
         </CollectionView.ItemTemplate>
-    </CollectionView>
+            <CollectionView.Footer>
+                <StackLayout BackgroundColor="White">
+                    <Label HeightRequest="50"
+                   Text="" />
+                </StackLayout>
+            </CollectionView.Footer>
+        </CollectionView>
     </RefreshView>
 </ContentPage>
