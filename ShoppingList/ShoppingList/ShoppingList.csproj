@@ -12,6 +12,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Fonts\Font Awesome 6 Brands-Regular-400.otf" />
+    <None Remove="Resources\Fonts\Font Awesome 6 Free-Regular-400.otf" />
+    <None Remove="Resources\Fonts\Font Awesome 6 Free-Solid-900.otf" />
+    <None Remove="Resources\Icons\icon_trash.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\Font Awesome 6 Brands-Regular-400.otf" />
+    <EmbeddedResource Include="Resources\Fonts\Font Awesome 6 Free-Regular-400.otf" />
+    <EmbeddedResource Include="Resources\Fonts\Font Awesome 6 Free-Solid-900.otf" />
+    <EmbeddedResource Include="Resources\Icons\icon_trash.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />

@@ -33,28 +33,27 @@
                         <SwipeView.RightItems>
                             <SwipeItems>
                                 <SwipeItem
-                                    BackgroundColor="Green"
+                                    BackgroundColor="#7d7aff"
                                     Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.EditItemCommand}"
                                     CommandParameter="{Binding .}"
-                                    IsDestructive="True"
-                                    Text="Redigera" />
+                                    IconImageSource ="icon_edit.png"
+                                    IsDestructive="True"/>
                                 <SwipeItem
-                                    BackgroundColor="Red"
+                                    BackgroundColor="#ff453c"
                                     Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteItemCommand}"
                                     CommandParameter="{Binding}"
                                     IsDestructive="True"
-                                    Text="Ta bort" />
+                                   IconImageSource ="icon_trash.png"/>
                             </SwipeItems>
                         </SwipeView.RightItems>
                         <StackLayout>
-                    <CheckBox x:Name="itemCheckbox" IsChecked="{Binding Done,Mode=OneTime}" CheckedChanged="OnCheckBoxCheckedChanged"/>
+                    <CheckBox x:Name="itemCheckbox" 
+                              IsChecked="{Binding Done,Mode=OneTime}" 
+                              CheckedChanged="OnCheckBoxCheckedChanged"
+                              Color="#1a73e8"
+                              />
                         <Label Text="{Binding Text}"
                            FontSize="Medium"/>
-                        <Label Text="{Binding ListId}"
-                           FontSize="Medium"/>
-                        <Label Text="{Binding Done}"
-                           TextColor="Silver"
-                           FontSize="Small" />
                 </StackLayout>
                 </SwipeView>
                 </DataTemplate>
