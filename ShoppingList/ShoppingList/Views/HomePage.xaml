@@ -37,31 +37,48 @@
                     <SwipeView.RightItems>
                         <SwipeItems>
                             <SwipeItem
-                                    BackgroundColor="Green"
+                                    BackgroundColor="#7d7aff"
                                     Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.EditListCommand}"
                                     CommandParameter="{Binding .}"
                                     IsDestructive="True"
-                                    Text="Redigera" />
+                                    IconImageSource ="icon_edit.png"/>
                             <SwipeItem
-                                    BackgroundColor="Red"
+                                    BackgroundColor="#ff453c"
                                     Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteListCommand}"
                                     CommandParameter="{Binding}"
-                                    IsDestructive="True"
-                                    Text="Ta bort" />
+                                    IconImageSource ="icon_trash.png"
+                                    IsDestructive="True"/>
                         </SwipeItems>
                     </SwipeView.RightItems>
-                    <StackLayout>
+                        <Frame Padding="5">
+                            <StackLayout Orientation="Vertical"
+                                HeightRequest="60">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                </Grid>
                     <Label Text="{Binding Title}"
-                           FontSize="Medium"/>
-                    <Label Text="{Binding Id}"
-                           FontSize="Medium"/>
+                           FontSize="Medium"
+                           Grid.Row="0"
+                           VerticalOptions="Center"/>
                     <Label Text="{Binding Date}"
                            TextColor="Silver"
-                           FontSize="Small" />
+                           FontSize="Small"
+                           Grid.Row="1"
+                           VerticalOptions="End"/>
                 </StackLayout>
-                </SwipeView>
+                        </Frame>
+                    </SwipeView>
             </DataTemplate>
         </CollectionView.ItemTemplate>
-    </CollectionView>
+            <CollectionView.Footer>
+                <StackLayout BackgroundColor="White">
+                    <Label HeightRequest="50"
+                   Text="" />
+                </StackLayout>
+            </CollectionView.Footer>
+        </CollectionView>
     </RefreshView>
 </ContentPage>
