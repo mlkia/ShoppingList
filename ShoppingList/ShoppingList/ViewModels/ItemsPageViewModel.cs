@@ -135,7 +135,7 @@ namespace ShoppingList.ViewModels
         }
 
         //<summary>
-        //Get all items of  the list from the database and set them to the ItemsList property.
+        //Get all items of the list from the database and set them to the ItemsList property.
         //</summary>
         async void GetItems(string Id)
         {

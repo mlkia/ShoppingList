@@ -4,7 +4,7 @@
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              xmlns:viewModels="clr-namespace:ShoppingList.ViewModels"
              x:Class="ShoppingList.Views.HomePage"
-             Title="Inköping Lista">
+             Title="Mina inköpslistor">
 
     <ContentPage.BindingContext>
         <viewModels:ListViewModel />
